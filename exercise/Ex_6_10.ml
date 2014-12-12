@@ -44,11 +44,7 @@ let f3 (f, g) x =
 ;;
 
 (* 4 *)
-let rec f4 f =
-  match f with
-  | Left f1 -> f4 f
-  | Right f2 -> f4 f
-;;
+
 
 (* 5 *)
 let f5 = function
