@@ -1,4 +1,10 @@
-(** Ex 3.5 *)
+(** 
+Exercise 3.5 次のふたつの型
+float * float * float * float
+(float * float) * (float * float)
+の違いを,その型に属する値の構成法と,要素の取出し方からみて比較せよ.
+ *)
+
 (* 
 1: float * float * float * float
 2: (float * float) * (float * float)

@@ -1,4 +1,9 @@
 textbook/
 
 */tmp.ml
-
+*/*.cmi
+*/*.cmo
+*/*.log
+*/*.cache
+*/test
+*/.#*

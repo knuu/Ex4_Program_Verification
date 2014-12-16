@@ -15,7 +15,7 @@ type loc_fig = {x : int; y : int; fig : figure};;
  *)
 
 let square x = x * x;;
-
+(*
 let overlap f1 f2 = 
   let make_point (x, y) = {x = x; y = y; fig = Point} in
   let square_to_rectangle {x = sx; y = sy; fig = Square a} =
@@ -80,3 +80,4 @@ let overlap f1 f2 =
   | (Square a1, Square a2) -> rectangle_rectangle ((square_to_rectangle f1), 
 					     (square_to_rectangle f2))
 ;;
+ *)

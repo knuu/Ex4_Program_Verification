@@ -9,7 +9,6 @@ let fib n =
 
 (* ¥Æ¥¹¥È *)
 
-
 let rec fib_pair n =
   if n = 1 then (0, 1)
   else
@@ -17,7 +16,7 @@ let rec fib_pair n =
 
 ;;
 
-fib2 15 = (fib 14, fib 15);;
+fib_pair 15 = (fib 14, fib 15);;
 
 
   

@@ -1,4 +1,6 @@
-(** Ex 3.10 *)
+(**
+Exercise 3.10 fib 4 の値呼出しによる評価ステップをテキストに倣って示せ.
+ *)
 let rec fib n = (* nth Fibonacci number *)
   if n = 1 || n = 2 then 1 else fib(n - 1) + fib(n - 2);;
 (*
