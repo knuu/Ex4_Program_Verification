@@ -1,6 +1,6 @@
 .PHONY: test clean
 
-OBJS= ex_2_*.ml ex_3_*.ml test.ml
+OBJS= ex_2_*.ml ex_3_*.ml ex_4_*.ml test.ml
 
 all: test
 	./test

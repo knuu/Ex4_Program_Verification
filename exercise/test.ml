@@ -125,15 +125,52 @@ let ex_3_11 =
      "fib_iter10=fib10">:: fib_iter2;
      "max_ascii'String'='t'">:: max_ascii]
 ;;
-	
+
+let ex_3_12 =
+  let rec pos n =
+    neg (n-1) +. 1.0 /. (float_of_int (4 * n + 1))
+  and neg n =
+    if n < 0 then 0.0
+    else pos n -. 1.0 /. (float_of_int (4 * n + 3)) in
+  let leibniz_f _ = assert_equal (Ex_3_12.leibniz_f 800) (pos 800) in
+  "ex_3_12">:::
+    ["Leibniz formula">:: leibniz_f]
+;;
+
+let ex_4_1 =
+  let integral _ = assert_equal (Ex_4_1.integral (fun x -> x) 0. 1.) 0.5 in
+  "ex_4_1">:::
+    ["integral[0,1] xdx = 0.5">:: integral]
+;;
+
+let ex_4_2 =
+  let cube _ = assert_equal (Ex_4_2.cube1 8.) (Ex_4_2.cube2 8.) in
+  "ex_4_2">:::
+    ["cube">:: cube]
+;;
+
+let ex_4_3 =
+  let ex_4_3_1 _ = assert_equal (Ex_4_3.plus_3 1 2 3) 6 in
+  let ex_4_3_2 _ = assert_equal (Ex_4_3.foo (fun x -> x) 1) 3 in 
+  let ex_4_3_3 _ = assert_equal (Ex_4_3.bar (fun x y -> x + y)) 6 in
+  "ex_4_3">:::
+    ["ex_4_3_1">:: ex_4_3_1;
+     "ex_4_3_2">:: ex_4_3_2;
+     "ex_4_3_3">:: ex_4_3_3]
+;;
+
 let () =
   run_test_tt_main ex_2_1;
   run_test_tt_main ex_2_3;
   run_test_tt_main ex_2_4;
   run_test_tt_main ex_2_6;
+  
   run_test_tt_main ex_3_1;
   run_test_tt_main ex_3_2;
   run_test_tt_main ex_3_7;
   run_test_tt_main ex_3_8;
   run_test_tt_main ex_3_11;
+  run_test_tt_main ex_3_12;
+
+  run_test_tt_main ex_4_1;
 ;;

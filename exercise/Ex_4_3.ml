@@ -1,4 +1,10 @@
-(** Ex 4.3 *)
+(**
+Exercise 4.3 以下の 3 つの型
+int -> int -> int -> int
+(int -> int) -> int -> int 
+(int -> int -> int) -> int
+の違いを説明せよ.また,各型に属する適当な関数を定義せよ.
+ *)
 (*
 int->int->int->int
 引数: int型3つ
