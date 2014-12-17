@@ -159,6 +159,33 @@ let ex_4_3 =
      "ex_4_3_3">:: ex_4_3_3]
 ;;
 
+let ex_4_4 =
+  let average (x, y) = (x +. y) /. 2. in
+  let curry_uncurry _ = assert_equal ((Ex_4_4.uncurry (Ex_4_4.curry average)) (4.0, 5.3)) (average(4.0, 5.3)) in
+  "ex_4_4">:::
+    ["curry_uncurry">:: curry_uncurry]
+;;
+
+let ex_4_5 =
+  let fib _ = assert_equal (Ex_4_5.fib 1000) (Ex_3_11.fib_iter 1000) in
+  "ex_4_5">:::
+    ["fib">:: fib]
+;;
+
+let ex_4_6 =
+  let funny1 _ = assert_equal (Ex_4_6.funny succ 10 5) 15 in
+  let funny2 _ = assert_equal (Ex_4_6.funny succ 10 5) (Ex_4_6.funny_rec succ 10 5) in
+  "ex_4_6">:::
+    ["funny1">:: funny1;
+     "funny2">:: funny2]
+;;
+
+let ex_4_7 =
+  let combinator _ = assert_equal ((Ex_4_7.k (Ex_4_7.s Ex_4_7.k Ex_4_7.k)) 1 2) 2 in
+  "ex_4_7">:::
+    ["combinator">:: combinator]
+;;
+
 let () =
   run_test_tt_main ex_2_1;
   run_test_tt_main ex_2_3;
@@ -173,4 +200,10 @@ let () =
   run_test_tt_main ex_3_12;
 
   run_test_tt_main ex_4_1;
+  run_test_tt_main ex_4_2;
+  run_test_tt_main ex_4_3;
+  run_test_tt_main ex_4_4;
+  run_test_tt_main ex_4_5;
+  run_test_tt_main ex_4_6;
+  run_test_tt_main ex_4_7;
 ;;
