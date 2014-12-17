@@ -1,4 +1,7 @@
-(** Ex 6.1 *)
+(** 
+Exercise 6.1 以下のレコード型 loc_fig は,図形に xy 平面上での位置情報をもたせたものである.正方形,長方形は,各辺が軸に並行であるように配置されていると仮定 (長方形に関しては, Rectangle (x, y) の x の表す辺が x 軸に並行,とする.) し,二つの図形が重なりを持つか判定する関数 overlap を定義せよ.
+    type loc_fig = {x : int; y : int; fig : figure};;
+ *)
 type figure =
   | Point
   | Circle of int

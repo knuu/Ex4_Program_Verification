@@ -264,6 +264,92 @@ let ex_5_8 =
     ["map2">:: map2]
 ;;
 
+let ex_6_2 =
+  let mul _ = assert_equal (Ex_6_2.int_of_nat(Ex_6_2.mul Ex_6_2.two Ex_6_2.three)) 6 in
+  let monus _ = assert_equal (Ex_6_2.int_of_nat(Ex_6_2.monus Ex_6_2.three Ex_6_2.one)) 2 in
+  "ex_6_2">:::
+    ["mul two three">:: mul;
+     "monus three one">:: monus]
+;;
+			  
+let ex_6_3 =
+  let monus1 _ = assert_equal (Ex_6_3.monus Ex_6_3.two Ex_6_3.three) (Ex_6_3.None) in
+  let monus2 _ = assert_equal (Ex_6_3.get_value (Ex_6_3.monus Ex_6_3.three Ex_6_3.two) Ex_6_3.Zero) (Ex_6_3.monus' Ex_6_3.three Ex_6_3.two) in
+  "ex_6_3">:::
+    ["monus two three = None">:: monus1;
+     "monus equal">:: monus2]
+;;
+
+let ex_6_4 =
+  let comptree _ = assert_equal (Ex_6_4.comptree 1 3) (Ex_6_4.comptree3) in
+  let depth _ = assert_equal (Ex_6_4.depth (Ex_6_4.comptree 1 3)) 3 in
+  "ex_6_4">:::
+    ["comptree">:: comptree;
+     "depth comptree">:: depth]
+;;
+
+let ex_6_5 =
+  let inord _ = assert_equal (Ex_6_5.inord Ex_6_5.comptree3 []) ([4; 2; 5; 1; 6; 3; 7]) in
+  let postord _ = assert_equal (Ex_6_5.postord Ex_6_5.comptree3 []) ([4; 5; 2; 6; 7; 3; 1]) in
+  "ex_6_5">:::
+    ["inord">:: inord;
+     "postord">:: postord]
+;;
+
+let ex_6_6 =
+  let reflect _ = assert_equal (Ex_6_6.reflect Ex_6_6.comptree3) (Ex_6_6.rev_comptree3) in
+  let order1 _ = assert_equal (Ex_6_6.preorder(Ex_6_6.reflect(Ex_6_6.comptree3))) (Ex_6_6.rev(Ex_6_6.postorder(Ex_6_6.comptree3))) in
+  let order2 _ = assert_equal (Ex_6_6.inorder(Ex_6_6.reflect(Ex_6_6.comptree3))) (Ex_6_6.rev(Ex_6_6.inorder(Ex_6_6.comptree3))) in
+  let order3 _ = assert_equal (Ex_6_6.postorder(Ex_6_6.reflect(Ex_6_6.comptree3))) (Ex_6_6.rev(Ex_6_6.preorder(Ex_6_6.comptree3))) in
+  "ex_6_6">:::
+    ["reflect">:: reflect;
+     "preorder(reflect) = rev(postorder)">:: order1;
+     "inorder(reflect) = rev(inorder)">:: order2;
+     "postorder(reflect) = rev(preorder)">:: order3]
+;;
+
+let ex_6_8 =
+  let bst1' _ = assert_equal (Ex_6_8.bst1') (Ex_6_8.bst1) in
+  let bst2' _ = assert_equal (Ex_6_8.bst2') (Ex_6_8.bst2) in
+  let bst3' _ = assert_equal (Ex_6_8.bst3') (Ex_6_8.bst3) in
+  let bst4' _ = assert_equal (Ex_6_8.bst4') (Ex_6_8.bst3) in
+  let bst5' _ = assert_equal (Ex_6_8.bst5') (Ex_6_8.bst4) in
+  let bst6' _ = assert_equal (Ex_6_8.bst6') (Ex_6_8.bst5) in
+  let bst7' _ = assert_equal (Ex_6_8.bst7') (Ex_6_8.bst6) in
+  let bst8' _ = assert_equal (Ex_6_8.bst8') (Ex_6_8.bst7) in
+  let bst9' _ = assert_equal (Ex_6_8.bst9') (Ex_6_8.bst6) in
+  let bst10' _ = assert_equal (Ex_6_8.bst10') (Ex_6_8.bst6) in
+  let bst11' _ = assert_equal (Ex_6_8.bst11') (Ex_6_8.bst7) in
+  let bst12' _ = assert_equal (Ex_6_8.bst12') (Ex_6_8.bst7) in
+  let bst13' _ = assert_equal (Ex_6_8.bst13') (Ex_6_8.bst8) in
+  let bst14' _ = assert_equal (Ex_6_8.bst14') (Ex_6_8.bst8) in
+  let bst15' _ = assert_equal (Ex_6_8.bst15') (Ex_6_8.bst9) in
+  let bst16' _ = assert_equal (Ex_6_8.bst16') (Ex_6_8.bst9) in
+  let bst17' _ = assert_equal (Ex_6_8.bst17') (Ex_6_8.bst8) in
+  let bst18' _ = assert_equal (Ex_6_8.bst18') (Ex_6_8.bst9) in
+  let bst19' _ = assert_equal (Ex_6_8.bst19') (Ex_6_8.bst10) in
+  let bst20' _ = assert_equal (Ex_6_8.bst20') (Ex_6_8.bst11) in
+  let bst21' _ = assert_equal (Ex_6_8.bst21') (Ex_6_8.bst12) in
+  let bst22' _ = assert_equal (Ex_6_8.bst22') (Ex_6_8.bst12) in
+  let bst23' _ = assert_equal (Ex_6_8.bst23') (Ex_6_8.bst13) in
+  let bst24' _ = assert_equal (Ex_6_8.bst24') (Ex_6_8.bst14) in
+  "ex_6_8">:::
+    ["bst1'">:: bst1'; "bst2'">:: bst2'; "bst3'">:: bst3';
+     "bst4'">:: bst4'; "bst5'">:: bst5'; "bst6'">:: bst6';
+     "bst7'">:: bst7'; "bst8'">:: bst8'; "bst9'">:: bst9';
+     "bst10'">:: bst10'; "bst11'">:: bst11'; "bst12'">:: bst12';
+     "bst13'">:: bst13'; "bst14'">:: bst14'; "bst15'">:: bst15';
+     "bst16'">:: bst16'; "bst17'">:: bst17'; "bst18'">:: bst18';
+     "bst19'">:: bst19'; "bst20'">:: bst20'; "bst21'">:: bst21';
+     "bst22'">:: bst22'; "bst23'">:: bst23'; "bst24'">:: bst24';]
+;;  
+
+let ex_6_9 =
+  let seq _ = assert_equal (Ex_6_9.nthseq 10000 Ex_6_9.primes) 104729 in
+  "ex_6_9">:::
+    ["1000th prime">:: seq]
+;;
+
 let () =
   run_test_tt_main ex_2_1;
   run_test_tt_main ex_2_3;
@@ -292,4 +378,12 @@ let () =
   run_test_tt_main ex_5_6;
   run_test_tt_main ex_5_7;
   run_test_tt_main ex_5_8;
+
+  run_test_tt_main ex_6_2;
+  run_test_tt_main ex_6_3;
+  run_test_tt_main ex_6_4;
+  run_test_tt_main ex_6_5;
+  run_test_tt_main ex_6_6;
+  run_test_tt_main ex_6_8;
+  run_test_tt_main ex_6_9;
 ;;

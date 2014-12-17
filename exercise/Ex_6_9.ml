@@ -1,5 +1,5 @@
 (**
-Exercise 6.9 é–¢æ•° sift ã‚’å®šç¾©ã—,âŸ¨ è‡ªåˆ†ã®å­¦ç±ç•ªå· + 3000âŸ© ç•ªç›®ã®ç´ æ•°ã‚’æ±‚ã‚ã‚ˆ.
+Exercise 6.9 ´Ø¿ô sift ¤òÄêµÁ¤·, (¼«Ê¬¤Î³ØÀÒÈÖ¹æ + 3000) ÈÖÌÜ¤ÎÁÇ¿ô¤òµá¤á¤è.
  *)
 
 type 'a seq = Cons of 'a * (unit -> 'a seq);;
@@ -23,6 +23,5 @@ take 20 primes = [2; 3; 5; 7; 11; 13; 17; 19; 23; 29; 31; 37; 41; 43; 47; 53; 59
 let rec nthseq n (Cons (x, f)) =
   if n = 1 then x else nthseq (n - 1) (f());;
 
-nthseq 1000 primes = 7919;;
 
-nthseq (1029240446 + 3000) primes;;
+(* nthseq (1029240446 + 3000) primes;; *)

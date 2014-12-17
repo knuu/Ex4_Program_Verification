@@ -1,17 +1,17 @@
 (**
-Exercise 6.7 ä»¥ä¸‹ã¯,è¶³ã—ç®—ã¨æ›ã‘ç®—ã‹ã‚‰ãªã‚‹æ•°å¼ã®æ§‹æ–‡ã‚’è¡¨ã—ãŸå‹å®šç¾©ã§ã‚ã‚‹.
-    # type arith =
-        Const of int | Add of arith * arith | Mul of arith * arith;;
-    type arith = Const of int | Add of arith * arith | Mul of arith * arith
-    # (* exp stands for (3+4) * (2+5) *)
-      let exp = Mul (Add (Const 3, Const 4), Add (Const 2, Const 5));;
-    val exp : arith = Mul (Add (Const 3, Const 4), Add (Const 2, Const 5))
-æ•°å¼ã®æ–‡å­—åˆ—è¡¨ç¾ã‚’æ±‚ã‚ã‚‹é–¢æ•° string_of_arith, åˆ†é…å‰‡ã‚’ç”¨ã„ã¦æ•°å¼ã‚’ (i11 Ã— Â·Â·Â· Ã— i1n1 ) + Â· Â· Â· + (im1 Ã— Â· Â· Â· Ã— imnm ) ã®å½¢ã«å¤‰å½¢ã™ã‚‹é–¢æ•° expand ã‚’å®šç¾©ã›ã‚ˆ.
-    # string_of_arith exp;;
-    - : string = "((3+4)*(2+5))"
-    # string_of_arith (expand exp);;
-    - : string = "(((3*2)+(3*5))+((4*2)+(4*5)))"
-(ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¨ã—ã¦) string_of_arith ã®å‡ºåŠ›çµæœã®æ‹¬å¼§ã‚’æ¸›ã‚‰ã™ã‚ˆã†ã«å·¥å¤«ã›ã‚ˆ.(ä¸Šã®å‡ºåŠ›ä¾‹ã§ã¯ ä½•ã‚‚å·¥å¤«ã—ã¦ã„ãªã„.)
+Exercise 6.7 °Ê²¼¤Ï,Â­¤·»»¤È³İ¤±»»¤«¤é¤Ê¤ë¿ô¼°¤Î¹½Ê¸¤òÉ½¤·¤¿·¿ÄêµÁ¤Ç¤¢¤ë.
+# type arith =
+    Const of int | Add of arith * arith | Mul of arith * arith;;
+type arith = Const of int | Add of arith * arith | Mul of arith * arith
+# (* exp stands for (3+4) * (2+5) *)
+ let exp = Mul (Add (Const 3, Const 4), Add (Const 2, Const 5));;
+val exp : arith = Mul (Add (Const 3, Const 4), Add (Const 2, Const 5))
+¿ô¼°¤ÎÊ¸»úÎóÉ½¸½¤òµá¤á¤ë´Ø¿ô string_of_arith, Ê¬ÇÛÂ§¤òÍÑ¤¤¤Æ¿ô¼°¤ò (i_11 * ... * i_1n1 ) + ... + (i_m1 * ... * i_mnm ) ¤Î·Á¤ËÊÑ·Á¤¹¤ë´Ø¿ô expand ¤òÄêµÁ¤»¤è.
+# string_of_arith exp;;
+- : string = "((3+4)*(2+5))"
+# string_of_arith (expand exp);;
+- : string = "(((3*2)+(3*5))+((4*2)+(4*5)))"
+(¥ª¥×¥·¥ç¥ó¤È¤·¤Æ) string_of_arith ¤Î½ĞÎÏ·ë²Ì¤Î³ç¸Ì¤ò¸º¤é¤¹¤è¤¦¤Ë¹©É×¤»¤è.(¾å¤Î½ĞÎÏÎã¤Ç¤Ï ²¿¤â¹©É×¤·¤Æ¤¤¤Ê¤¤.)
  *)
 
 type arith = Const of int | Add of arith * arith | Mul of arith * arith;;
