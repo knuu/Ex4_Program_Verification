@@ -186,6 +186,84 @@ let ex_4_7 =
     ["combinator">:: combinator]
 ;;
 
+let ex_5_2 =
+  let sum_list _ = assert_equal (Ex_5_2.sum_list [1;2;3;4;5;6;7;8;9;10]) 55 in
+  let max_list _ = assert_equal (Ex_5_2.max_list [1;5;7;2;1;5;7;8;4;2;5;7]) 8 in
+  "ex_5_2">:::
+    ["sum_list">:: sum_list;
+     "max_list">:: max_list]
+;;
+
+let ex_5_3 =
+  let rec length = function
+    | [] -> 0 
+    | _ :: t -> succ (length t) in
+  let downto0 _ = assert_equal (Ex_5_3.downto0 10) ([10;9;8;7;6;5;4;3;2;1;0]) in
+  let roman1 _ = assert_equal (Ex_5_3.roman [(1000, "M"); (500, "D"); (100, "C"); (50, "L"); (10, "X"); (5, "V"); (1, "I")] 1984) ("MDCCCCLXXXIIII") in
+  let roman2 _ = assert_equal (Ex_5_3.roman [(1000, "M"); (900, "CM"); (500, "D"); (400, "CD"); (100, "C"); (90, "XC"); (50, "L"); (40, "XL"); (10, "X"); (9, "IX"); (5, "V"); (4, "IV"); (1, "I")] 1984) ("MCMLXXXIV") in
+  let concat _ = assert_equal (Ex_5_3.concat [[0; 3; 4]; [2]; [5; 0]; []]) ([0; 3; 4; 2; 5; 0]) in
+  let zip1 _ = assert_equal (Ex_5_3.zip [1;2;3] [2;3;4]) ([(1,2);(2,3);(3,4)]) in
+  let zip2 _ = assert_equal (Ex_5_3.zip [1;1;1;1] [1;1]) (Ex_5_3.zip [1;1] [1;1;1;1]) in
+  let zip3 _ = assert_equal (Ex_5_3.zip [] [1]) (Ex_5_3.zip [1] []) in
+  let filter1 _ = assert_equal (Ex_5_3.filter (fun x -> x > 0) [-9; 0; 2; 5; -3]) ([2; 5]) in
+  let filter2 _ = assert_equal (Ex_5_3.filter (fun l -> length l = 3) [[1; 2; 3]; [4; 5]; [6; 7; 8]; [9]]) ([[1; 2; 3]; [6; 7; 8]]) in
+  let belong _ = assert_equal (Ex_5_3.belong [3;4] [[1];[2;3];[3;4];[3;4;5]]) (not (Ex_5_3.belong [] [[1];[2];[3]])) in
+  let intersect _ = assert_equal (Ex_5_3.intersect [1;4;7;8;9;10] [4;7;1;0;3]) ([1;4;7]) in
+  let union _ = assert_equal (Ex_5_3.union [1;2;3;4] [2;3;4;5]) ([1;2;3;4;5]) in
+  let diff _ = assert_equal (Ex_5_3.diff [1;2;3;4] [2;4;6;7]) ([1;3]) in
+  "ex_5_3">:::
+    ["downto0">:: downto0;
+     "roman1">:: roman1;
+     "roman2">:: roman2;
+     "concat">:: concat;
+     "zip same_len">:: zip1;
+     "zip different_len">:: zip2;
+     "zip zero_len">:: zip3;
+     "filter1">:: filter1;
+     "filter2">:: filter2;
+     "belong">:: belong;
+     "intersect">:: intersect;
+     "union">:: union;
+     "diff">:: diff]
+;;
+
+let ex_5_4 = 
+  let f x = x + 1 and g x = x * 2 in
+  let map _ = assert_equal (Ex_5_4.map (fun x -> f (g x)) [0;1;2;3;4;5;6;7;8;9;10]) (Ex_5_4.map f (Ex_5_4.map g [0;1;2;3;4;5;6;7;8;9;10])) in
+  "ex_5_4">:::
+    ["map f g">:: map]
+;;
+
+let ex_5_5 =
+  let forall _ = assert_equal (Ex_5_5.forall (fun c -> 'z' > c) ['A'; ' '; '+']) (true) in
+  let exists _ = assert_equal (Ex_5_5.exists (fun x -> (x mod 7) = 0) [23; -98; 19; 53]) (true) in
+  "ex_5_5">:::
+    ["forall">:: forall;
+     "exists">:: exists]
+;;
+
+let ex_5_6 =
+  let l1 = snd(Ex_5_6.randlist 50 1.0 []) in
+  let l2 = snd(Ex_5_6.randlist 10000 1.0 []) in
+  let quick1 _ = assert_equal (Ex_5_6.quicker l1 []) (Ex_5_6.quick l1) in
+  let quick2 _ = assert_equal (Ex_5_6.quicker l2 []) (Ex_5_6.insertion_sort l2) in
+  "ex_5_6">:::
+    ["quicker and quick">:: quick1;
+     "quicker and insert">:: quick2]
+;;
+
+let ex_5_7 =
+  let square _ = assert_equal (Ex_5_7.length (Ex_5_7.squares 48612265)) 32 in
+  "ex_5_7">:::
+    ["square">:: square]
+;;
+
+let ex_5_8 =
+  let map2 _ = assert_equal (Ex_5_8.map (fun x -> x * 2) [4; 91; 0; -34]) (Ex_5_8.map2 (fun x -> x * 2) [4; 91; 0; -34]) in
+  "ex_5_8">:::
+    ["map2">:: map2]
+;;
+
 let () =
   run_test_tt_main ex_2_1;
   run_test_tt_main ex_2_3;
@@ -206,4 +284,12 @@ let () =
   run_test_tt_main ex_4_5;
   run_test_tt_main ex_4_6;
   run_test_tt_main ex_4_7;
+
+  run_test_tt_main ex_5_2;
+  run_test_tt_main ex_5_3;
+  run_test_tt_main ex_5_4;
+  run_test_tt_main ex_5_5;
+  run_test_tt_main ex_5_6;
+  run_test_tt_main ex_5_7;
+  run_test_tt_main ex_5_8;
 ;;

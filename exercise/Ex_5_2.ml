@@ -1,10 +1,8 @@
-(** Ex 5.2 *)
-let hd = function
-  | [] -> 42
-  | x::rest -> x;;
-let tl = function
-  | [] -> []
-  | x::rest -> rest;;
+(**
+Exercise 5.2 sum_list,max_list を,match を使わず null, hd, tl の組合わせのみで定義せよ. match を使うテキストの定義と比べ,記述面などの利害得失を議論せよ.
+ *)
+let hd (x::rest) = x;;
+let tl (x::rest) = rest;;
 let null = function [] -> true | _ -> false;;
 
 let rec sum_list l =

@@ -1,4 +1,6 @@
-(** Ex 5.7 *)
+(**
+Exercise 5.7 与えられた自然数 r に対して x^2 + y^2 = r であるような,(x, y) (ただし x >= y >= 0) の組を全てリストとして列挙する関数 squares r を定義せよ.(検算用資料: r = 48612265 の時 32 個の解があるそうです.)
+ *)
 let squares r = 
   let rec sq x =
     let rec y = int_of_float(sqrt(float_of_int(r - x * x)))
@@ -8,6 +10,5 @@ let squares r =
   in sq 1
 ;;
 
-(* Test *)
+(* ******* *)
 let rec length = function | [] -> 0 | _ :: t -> succ(length t);;
-length(squares 48612265) = 32;;
