@@ -350,6 +350,46 @@ let ex_6_9 =
     ["1000th prime">:: seq]
 ;;
 
+let ex_7_1 = 
+  let a = Ex_7_1.ref 3 in
+  Ex_7_1.(:=) a 6;
+  let test_ref _ = assert_equal (Ex_7_1.(!) a) 6 in
+  "ex_7_1">:::
+    ["test_ref">:: test_ref]
+;;
+
+let ex_7_2 =
+  let x = ref 3 in
+  Ex_7_2.incr x;
+  let test_incr _ = assert_equal !x 4 in
+  "ex_7_2">:::
+    ["test_incr">:: test_incr]
+;;
+
+let ex_7_4 =
+  let test_fact_imp _ = assert_equal (Ex_7_4.fact_imp 6) 720 in
+  "ex_7_4">:::
+    ["test_fact_imp">:: test_fact_imp]
+;;
+
+let ex_7_5 = 
+  let test_fact1 _ = assert_equal (try Ex_7_5.fact 5 with Ex_7_5.Invalid_argument -> 0) 120 in
+  let test_fact2 _ = assert_equal (try Ex_7_5.fact (-10) with Ex_7_5.Invalid_argument -> 0) 0 in
+  "ex_7_5">:::
+    ["test_fact plus">:: test_fact1;
+     "test_fact minus">:: test_fact2]
+;;
+
+let ex_7_8 =
+  let test_us_coins _ = assert_equal (Ex_7_8.change (Ex_7_8.gb_coins, 43)) ([20; 20; 2; 1]) in
+  let test_gb_coins _ = assert_equal (Ex_7_8.change (Ex_7_8.us_coins, 43)) ([25; 10; 5; 1; 1; 1]) in
+  let test_fail _ = assert_equal (Ex_7_8.change ([5; 2], 16)) ([5; 5; 2; 2; 2]) in
+  "ex_7_8">:::
+    ["test_us_coins">:: test_us_coins;
+     "test_gb_coins">:: test_gb_coins;
+     "test_fail">:: test_fail]
+;;
+
 let () =
   run_test_tt_main ex_2_1;
   run_test_tt_main ex_2_3;
@@ -386,4 +426,10 @@ let () =
   run_test_tt_main ex_6_6;
   run_test_tt_main ex_6_8;
   run_test_tt_main ex_6_9;
+
+  run_test_tt_main ex_7_1;
+  run_test_tt_main ex_7_2;
+  run_test_tt_main ex_7_4;
+  run_test_tt_main ex_7_5;
+  run_test_tt_main ex_7_8;
 ;;

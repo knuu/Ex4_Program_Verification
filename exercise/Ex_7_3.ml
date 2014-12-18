@@ -1,20 +1,15 @@
 (** 
-Exercise 7.3 ä»¥ä¸‹ã§å®šç¾©ã™ã‚‹ funny_fact ã¯å†å¸°çš„å®šç¾© (rec) ã‚’ä½¿ã‚ãšã«éšä¹—ã‚’è¨ˆç®—ã—ã¦ã„ã‚‹.ã©ã®ã‚ˆã†ãªä»•çµ„ã¿ã§å®Ÿç¾ã•ã‚Œã¦ã„ã‚‹ã‹èª¬æ˜ã›ã‚ˆ.
-    # let f = ref (fun y -> y + 1)
-      let funny_fact x = if x = 1 then 1 else x * (!f (x - 1));;
+Exercise 7.3 °Ê²¼¤ÇÄêµÁ¤¹¤ë funny_fact ¤ÏºÆµ¢ÅªÄêµÁ (rec) ¤ò»È¤ï¤º¤Ë³¬¾è¤ò·×»»¤·¤Æ¤¤¤ë.¤É¤Î¤è¤¦¤Ê»ÅÁÈ¤ß¤Ç¼Â¸½¤µ¤ì¤Æ¤¤¤ë¤«ÀâÌÀ¤»¤è.
+# let f = ref (fun y -> y + 1)
+  let funny_fact x = if x = 1 then 1 else x * (!f (x - 1));;
 val f : (int -> int) ref = {contents = <fun>} val funny_fact : int -> int = <fun>
 # f := funny_fact;;
 - : unit = ()
-    # funny_fact 5;;
+# funny_fact 5;;
 - : int = 120
  *)
 
-let f = ref (fun y -> y + 1);;
-let funny_fact x =
-  if x = 1 then 1 else x * (!f (x - 1))
-;;
-
-f := funny_fact;;
-
-funny_fact 5;;
-	  
+(*
+funny_fact´Ø¿ô¤Ç¡¢³¬¾è¤òºÆµ¢Åª¤Ë·×»»¤ò¤¹¤ëÉôÊ¬¤Ç¸Æ¤Ó½Ğ¤¹´Ø¿ôf¤òÉûºîÍÑ¤¬µ¯¤³¤ê¤¦¤ëÊÑ¿ô¤È¤·¤ÆÄêµÁ¤·¤Æ¤ª¤¤¤Æ¡¢¤½¤Î¸å¡¢f¤Ëfunny_fact¤òÂåÆş¤·¤Æ¤¤¤ë¡£
+¤Ä¤Ş¤ê¡¢Ã±¤Ërec¤ò»È¤ï¤º¤ËÄêµÁ¤·¤Æ¤¤¤ë¤È¤¤¤¦¤À¤±¤Ç¡¢funny_fact¤¬¸Æ¤Ó½Ğ¤µ¤ì¤ë²ó¿ô¤Ê¤É¤Ï(ËöÈø¤µ¤¤¤­¤Ç¤Ê¤¤)ºÆµ¢ÅªÄêµÁ¤Îfact¤ÈÊÑ¤ï¤é¤Ê¤¤¡£
+ *)

@@ -9,7 +9,3 @@ let rec fact n =
   else if n = 0 then 1 else n * fact (n - 1)
 ;;
 
-(* Test *)
-fact 5 = 120;;
-(try fact (-10) with Invalid_argument -> 0) = 0;;
-
