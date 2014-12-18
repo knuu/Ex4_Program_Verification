@@ -1,9 +1,16 @@
 textbook/
 
 */tmp.ml
-*/*.cmi
-*/*.cmo
+*/*.cm[iox]
 */*.log
 */*.cache
 */test
 */.#*
+
+interpreter/.depend
+interpreter/miniml
+interpreter/*.o
+interpreter/lexer.ml
+interpreter/parser.ml
+interpreter/parser.mli
+interpreter/parser.output
