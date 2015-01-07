@@ -64,12 +64,17 @@ let rec eval_exp env = function
      dummyenv := newenv;
      eval_exp newenv exp2
 
-let eval_decl env = function
-    Exp e -> let v = eval_exp env e in ("-", env, v)
-  | Decl (id, exp) ->
-     let v = eval_exp env exp in (id, Environment.extend id v env, v)
-  | RecDecl (id, para, exp) ->
-     let dummyenv = ref Environment.empty in
-     let newenv = Environment.extend id (ProcV (para, exp, dummyenv)) env in
-     dummyenv := newenv; 
-     (id, newenv, (ProcV (para, exp, dummyenv)))
+let eval_decl env expr = 
+  try (match expr with
+	  Exp e -> let v = eval_exp env e in ("-", env, v, "")
+	| Decl (id, exp) ->
+	   let v = eval_exp env exp in (id, Environment.extend id v env, v, "")
+	| RecDecl (id, para, exp) ->
+	   let dummyenv = ref Environment.empty in
+	   let newenv = Environment.extend id (ProcV (para, exp, dummyenv)) env in
+	   dummyenv := newenv; 
+	   (id, newenv, (ProcV (para, exp, dummyenv)), "") ) with
+    Error s -> ("exception", env, IntV 1, "Exception: " ^ s)
+  | Failure s -> ("exception", env, IntV 1, "Exception: Failure " ^ s)
+		 
+;;
