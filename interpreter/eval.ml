@@ -97,11 +97,14 @@ let rec eval_exp env = function
      dummyenv := newenv;
      eval_exp newenv exp2
 
-let eval_decl env expr = 
+let rec eval_decl env expr = 
   try (match expr with
 	  Exp e -> let v = eval_exp env e in ("-", env, v, "")
 	| Decl (id, exp) ->
 	   let v = eval_exp env exp in (id, Environment.extend id v env, v, "")
+	| DeclList (decl, decllist) ->
+	   let (id, newenv, v, _) = eval_decl env decl in
+	   eval_decl newenv decllist
 	| RecDecl (id, para, exp) ->
 	   let dummyenv = ref Environment.empty in
 	   let newenv = Environment.extend id (ProcV (para, exp, dummyenv)) env in

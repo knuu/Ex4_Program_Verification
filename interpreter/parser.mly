@@ -20,14 +20,21 @@ open Syntax
 
 toplevel :
     Expr SEMISEMI { Exp $1 }
-  | LET ID EQ Expr SEMISEMI { Decl ($2, $4) }
+  | DeclListExpr SEMISEMI { $1 }
   | LET REC ID EQ FUN ID RARROW Expr SEMISEMI { RecDecl ($3, $6, $8) }
+
+DeclListExpr :
+    DeclExpr DeclListExpr { DeclList ($1, $2) }
+  | DeclExpr { $1 }
+
+DeclExpr :
+    LET ID EQ Expr { Decl ($2, $4) }
 
 Expr :
     IfExpr { $1 }
-  | ORExpr { $1 }
+  | OrExpr { $1 }
   | LetExpr { $1 }
-  | REExpr { $1 }
+  | ReExpr { $1 }
   | FunExpr { $1 }
   | LetRecExpr { $1 }
 
@@ -40,25 +47,25 @@ FunExpr :
 LetRecExpr :
     LET REC ID EQ FUN ID RARROW Expr IN Expr { LetRecExp ($3, $6, $8, $10) }
 
-ORExpr :
-    ORExpr OR ANDExpr { BinOp (Or, $1, $3) }
-  | ANDExpr { $1 }
+OrExpr :
+    OrExpr OR AndExpr { BinOp (Or, $1, $3) }
+  | AndExpr { $1 }
 
-ANDExpr :
-    ANDExpr AND NOTExpr { BinOp (And, $1, $3) }
-  | NOTExpr { $1 }
+AndExpr :
+    AndExpr AND NotExpr { BinOp (And, $1, $3) }
+  | NotExpr { $1 }
 
-NOTExpr :
-    NOT NOTExpr { UnaryOp (Not, $2) }
-  | REExpr { $1 }
+NotExpr :
+    NOT NotExpr { UnaryOp (Not, $2) }
+  | ReExpr { $1 }
 
-REExpr : 
-    REExpr LT PExpr { BinOp (Lt, $1, $3) }
-  | REExpr GT PExpr { BinOp (Gt, $1, $3) }
-  | REExpr LTE PExpr { BinOp (Lte, $1, $3) }
-  | REExpr GTE PExpr { BinOp (Gte, $1, $3) }
-  | REExpr EQ PExpr { BinOp (Eq, $1, $3) }
-  | REExpr NE PExpr { BinOp (Ne, $1, $3) }
+ReExpr : 
+    ReExpr LT PExpr { BinOp (Lt, $1, $3) }
+  | ReExpr GT PExpr { BinOp (Gt, $1, $3) }
+  | ReExpr LTE PExpr { BinOp (Lte, $1, $3) }
+  | ReExpr GTE PExpr { BinOp (Gte, $1, $3) }
+  | ReExpr EQ PExpr { BinOp (Eq, $1, $3) }
+  | ReExpr NE PExpr { BinOp (Ne, $1, $3) }
   | PExpr { $1 }
 
 PExpr :
