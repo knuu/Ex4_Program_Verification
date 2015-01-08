@@ -14,7 +14,9 @@ let rec quicker l sorted =
      in partition [] [] xs
 ;;
 
-(* ************ *)
+(* quickerの引数を2つにして、partitionで分割したものをappendでではなくquickerで統合している *)
+
+
 
 let rec quick = function
   | [] -> []
@@ -24,15 +26,17 @@ let rec quick = function
        | [] -> (quick left) @ (x :: quick right)
        | y :: ys -> if x < y then partition left (y :: right) ys
 		    else partition (y :: left) right ys
-     in partition [] [] xs;;
+     in partition [] [] xs 
+;;
 
 let rec insert (x : float) = function
     [] -> [x]
-  | (y :: rest) as l -> if x < y then x :: l else y :: (insert x rest)
+  | (y :: rest) as l -> if x < y then x :: l else y :: (insert x rest) 
 ;;
+
 let rec insertion_sort = function
     [] -> []
-  | x :: rest -> insert x (insertion_sort rest)
+  | x :: rest -> insert x (insertion_sort rest) 
 ;;
 
 let nextrand seed =
@@ -40,7 +44,17 @@ let nextrand seed =
   let t = a *. seed
   in t -. m *. floor (t /. m)
 ;;
+
 let rec randlist n seed tail =
   if n = 0 then (seed, tail)
   else randlist (n - 1) (nextrand seed) (seed::tail)
 ;;
+(*
+let l1 = snd(randlist 50 1.0 []) 
+let l2 = snd(randlist 10000 1.0 []) ;;
+
+quicker l1 [] = quick l1;;
+quicker l2 [] = insertion_sort l2;;
+ *)
+
+(* quickerとquickの等価性、quickerとinsertion_sortの等価性を確認している *)

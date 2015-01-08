@@ -8,7 +8,12 @@ let ref x = { contents = x }
 let (!) x = x.contents;;
 let (:=) x y = x.contents <- y;;
 
-(* Test *)
+(* 書くだけ *)
+
+(* 
 let a = ref 3;;
 a := 6;;
 !a = 6;;
+ *)
+
+(* 単なる動作確認 *) 

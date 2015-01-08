@@ -16,3 +16,10 @@ let forall p l = fold_right (&&) (map p l) true
 ;;
 let exists p l = fold_right (||) (map p l) false
 ;;
+
+(* && と || を使うだけ *)
+(*
+forall (fun c -> 'z' > c) ['A'; ' '; '+'] = true;;
+exists (fun x -> (x mod 7) = 0) [23; -98; 19; 53] = true;;
+ *)
+(* 単なる動作確認 *)

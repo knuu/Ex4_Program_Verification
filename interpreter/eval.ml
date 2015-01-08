@@ -82,7 +82,11 @@ let rec eval_exp env = function
   | LetExp (id, exp1, exp2) ->
      let value = eval_exp env exp1 in
      eval_exp (Environment.extend id value env) exp2
-  | FunExp (id, exp) -> ProcV (id, exp, ref env)
+  | FunExp (id, exp) -> 
+     (match id with 
+	ParaList (para, paralist) -> 
+	ProcV(id, eval_exp env (FunExp (paralist, exp)), ref env)
+       | _ -> ProcV (id, exp, ref env))
   | AppExp (exp1, exp2) ->
      let funval = eval_exp env exp1 in
      let arg = eval_exp env exp2 in
@@ -100,11 +104,11 @@ let rec eval_exp env = function
 let rec eval_decl env expr = 
   try (match expr with
 	  Exp e -> let v = eval_exp env e in ("-", env, v, "")
-	| Decl (id, exp) ->
-	   let v = eval_exp env exp in (id, Environment.extend id v env, v, "")
 	| DeclList (decl, decllist) ->
 	   let (id, newenv, v, _) = eval_decl env decl in
 	   eval_decl newenv decllist
+	| Decl (id, exp) ->
+	   let v = eval_exp env exp in (id, Environment.extend id v env, v, "")
 	| RecDecl (id, para, exp) ->
 	   let dummyenv = ref Environment.empty in
 	   let newenv = Environment.extend id (ProcV (para, exp, dummyenv)) env in

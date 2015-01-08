@@ -21,7 +21,6 @@ open Syntax
 toplevel :
     Expr SEMISEMI { Exp $1 }
   | DeclListExpr SEMISEMI { $1 }
-  | LET REC ID EQ FUN ID RARROW Expr SEMISEMI { RecDecl ($3, $6, $8) }
 
 DeclListExpr :
     DeclExpr DeclListExpr { DeclList ($1, $2) }
@@ -29,6 +28,7 @@ DeclListExpr :
 
 DeclExpr :
     LET ID EQ Expr { Decl ($2, $4) }
+  | LET REC ID EQ FUN ID RARROW Expr { RecDecl ($3, $6, $8) }
 
 Expr :
     IfExpr { $1 }
@@ -42,7 +42,11 @@ LetExpr :
     LET ID EQ Expr IN Expr { LetExp ($2, $4, $6) }
 
 FunExpr :
-    FUN ID RARROW Expr { FunExp ($2, $4) }
+    FUN ParaListExpr RARROW Expr { FunExp ($2, $4) } 
+
+ParaListExpr :
+    ID IdListExpr { ParaList($1, $2) }
+  | ID { $1 }
 
 LetRecExpr :
     LET REC ID EQ FUN ID RARROW Expr IN Expr { LetRecExp ($3, $6, $8, $10) }

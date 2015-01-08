@@ -17,7 +17,7 @@ let rec reflect = function
   | Br(x, right, left) -> Br(x, reflect left, reflect right)
 ;;
 
-
+(* 左右の葉を入れ替えて、さらに再帰的に左右の葉もreflectでひっくり返す *)
 (*
 listを反転する関数をrevとすると
 preorder(reflect(t)) = rev(postorder(t))
@@ -25,7 +25,6 @@ inorder(reflect(t)) = rev(inorder(t))
 postorder(reflect(t)) = rev(preorder(t))
  *)
 
-(* ********** *)
 let comptree3 = Br(1, Br(2, Br(4, Lf, Lf),
                             Br(5, Lf, Lf)),
                       Br(3, Br(6, Lf, Lf),
@@ -52,3 +51,12 @@ let rec inorder = function
 let rec postorder = function
           Lf -> []
         | Br (x, left, right) -> (postorder left) @ (postorder right) @ [x];;
+
+(*
+reflect comptree3 = rev_comptree3;;
+preorder(reflect(comptree3)) = rev(postorder(comptree3));;
+inorder(reflect(comptree3)) = rev(inorder(comptree3));;
+postorder(reflect(comptree3)) = rev(preorder(comptree3));;
+ *)
+(* reflectの動作確認と、方程式が正しいことの確認 *)
+

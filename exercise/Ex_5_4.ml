@@ -8,9 +8,10 @@ map (fun x -> f (g x)) l
 
 let rec map f = function 
   | [] -> []
-  | h :: t -> (f h) :: (map f t)
-;;
-let f x = x + 1;;
-let g x = x * 2;;
+  | h :: t -> (f h) :: (map f t);;
 
+(*
+let f x = x + 1 in
+let g x = x * 2 in
 map (fun x -> f (g x)) [0;1;2;3;4;5;6;7;8;9;10] = map f (map g [0;1;2;3;4;5;6;7;8;9;10]);;
+ *)

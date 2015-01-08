@@ -17,3 +17,9 @@ let fib n =
     repeat (fun (x, y) -> (x + y, x)) n (0, 1)
   in fibn;;
 
+(* 32ページのfib_pairのアイデアを元に実装 *)
+(*
+fib 1000 = Ex_3_11.fib_iter 1000;;
+ *)
+(* 動作確認 & 3.11のfib_iterと同等の出力か確認 *)
+

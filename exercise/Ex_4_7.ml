@@ -15,7 +15,14 @@ s k k 1
 let k x y = x;;
 let s x y z = x z (y z);;
 
-(k (s k k)) 1 2;;
+(*
+(k (s k k)) x y
+-> ((k (s k k)) x) y
+-> (s k k) x
+-> k x (k x)
+-> x
+ *)
 
+(k (s k k)) 1 2 = 2;;
 
 

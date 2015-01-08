@@ -80,26 +80,28 @@ let ex_2_6 =
      "ex_2_6_4(not lower)">:: test4_2]
 ;;
 
-let ex_3_1 =
+let ex_3_3 =
   let test1 _ = assert_equal (Ex_3_3.geo_mean (100., 10000.)) 1000. in
   let test2 _ = assert_equal (Ex_3_3.geo_mean (2., 2.)) ((2. +. 2.) /. 2.) in
-  "ex_3_1">:::
+  "ex_3_3">:::
     ["geo_mean 10^2 10^4 = 10^3">:: test1;
      "geo_mean a a = arith_mean a a">:: test2]
 ;;
 
-let ex_3_2 =
+let ex_3_4 =
   let test _ = assert_equal (Ex_3_4.prodMatVec (((1., 2.), (3., 4.)), (5., 6.))) (17., 39.) in
-  "ex_3_2">:::
+  "ex_3_4">:::
     ["prodMatVec">:: test]
 ;;
 
 let ex_3_7 =
   let pow1 _ = assert_equal (Ex_3_7_1.pow(3., 4)) 81. in
   let pow2 _ = assert_equal (Ex_3_7_2.pow(3., 4)) 81. in
+  let pow_ref _ = assert_equal (Ex_3_7_1.pow(4., 5)) (Ex_3_7_2.pow(4., 5)) in
   "ex_3_7">:::
     ["pow_rec_n">:: pow1;
-     "pow_rec_log">:: pow2]
+     "pow_rec_log">:: pow2;
+     "pow_ref">:: pow_ref]			
 ;;
 
 let ex_3_8 =
@@ -259,7 +261,7 @@ let ex_5_7 =
 ;;
 
 let ex_5_8 =
-  let map2 _ = assert_equal (Ex_5_8.map (fun x -> x * 2) [4; 91; 0; -34]) (Ex_5_8.map2 (fun x -> x * 2) [4; 91; 0; -34]) in
+  let map2 _ = assert_equal (Ex_5_4.map (fun x -> x * 2) [4; 91; 0; -34]) (Ex_5_8.map2 (fun x -> x * 2) [4; 91; 0; -34]) in
   "ex_5_8">:::
     ["map2">:: map2]
 ;;
@@ -273,8 +275,8 @@ let ex_6_2 =
 ;;
 			  
 let ex_6_3 =
-  let monus1 _ = assert_equal (Ex_6_3.monus Ex_6_3.two Ex_6_3.three) (Ex_6_3.None) in
-  let monus2 _ = assert_equal (Ex_6_3.get_value (Ex_6_3.monus Ex_6_3.three Ex_6_3.two) Ex_6_3.Zero) (Ex_6_3.monus' Ex_6_3.three Ex_6_3.two) in
+  let monus1 _ = assert_equal (Ex_6_3.monus Ex_6_2.two Ex_6_2.three) (Ex_6_3.None) in
+  let monus2 _ = assert_equal (Ex_6_3.get_value (Ex_6_3.monus Ex_6_2.three Ex_6_2.two) Ex_6_2.Zero) (Ex_6_2.monus Ex_6_2.three Ex_6_2.two) in
   "ex_6_3">:::
     ["monus two three = None">:: monus1;
      "monus equal">:: monus2]
@@ -396,8 +398,8 @@ let () =
   run_test_tt_main ex_2_4;
   run_test_tt_main ex_2_6;
   
-  run_test_tt_main ex_3_1;
-  run_test_tt_main ex_3_2;
+  run_test_tt_main ex_3_3;
+  run_test_tt_main ex_3_4;
   run_test_tt_main ex_3_7;
   run_test_tt_main ex_3_8;
   run_test_tt_main ex_3_11;

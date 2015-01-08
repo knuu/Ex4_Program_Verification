@@ -8,6 +8,7 @@ type exp =
     Var of id
   | ILit of int
   | BLit of bool
+  | ParaList of id * exp
   | UnaryOp of unaryOp * exp
   | BinOp of binOp * exp * exp
   | IfExp of exp * exp * exp
@@ -18,8 +19,8 @@ type exp =
 
 type program = 
     Exp of exp
-  | Decl of id * exp
   | DeclList of program * program
+  | Decl of id * exp
   | RecDecl of id * id * exp
 
 

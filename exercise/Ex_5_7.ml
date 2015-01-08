@@ -10,5 +10,12 @@ let squares r =
   in sq 1
 ;;
 
-(* ******* *)
-let rec length = function | [] -> 0 | _ :: t -> succ(length t);;
+(* x = 1から順番に、x * x + y * y = r を満たすペアを探している *)
+
+
+let rec length = function | [] -> 0 | _ :: t -> succ(length t)
+(*
+length (squares 48612265)) = 32;;
+ *)
+
+(* 単なる動作確認 *)

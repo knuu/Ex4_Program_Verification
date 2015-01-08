@@ -1,5 +1,5 @@
 (** 
-Exercise 6.2 nat åž‹ã®å€¤ã‚’ãã‚ŒãŒè¡¨ç¾ã™ã‚‹ int ã«å¤‰æ›ã™ã‚‹é–¢æ•° int_of_nat, nat ä¸Šã®æŽ›ã‘ç®—ã‚’è¡Œã†é–¢æ•° mul,nat ä¸Šã®å¼•ãç®—ã‚’è¡Œã†é–¢æ•° (ãŸã ã— 0 âˆ’ n = 0) monus (ãƒ¢ãƒ¼ãƒŠã‚¹) ã‚’å®šç¾©ã›ã‚ˆ.(mul, monus ã¯ *, - ãªã©ã®åŠ©ã‘ã‚’å€Ÿã‚Šã™ã‚™,nat åž‹ã®å€¤ã‹ã‚‰ã€Œç›´æŽ¥ã€è¨ˆç®—ã™ã‚‹ã‚ˆã†ã«ã›ã‚ˆ.)
+Exercise 6.2 nat ·¿¤ÎÃÍ¤ò¤½¤ì¤¬É½¸½¤¹¤ë int ¤ËÊÑ´¹¤¹¤ë´Ø¿ô int_of_nat, nat ¾å¤Î³Ý¤±»»¤ò¹Ô¤¦´Ø¿ô mul,nat ¾å¤Î°ú¤­»»¤ò¹Ô¤¦´Ø¿ô (¤¿¤À¤· 0 - n = 0) monus (¥â¡¼¥Ê¥¹) ¤òÄêµÁ¤»¤è.(mul, monus ¤Ï *, - ¤Ê¤É¤Î½õ¤±¤ò¼Ú¤ê¤º,nat ·¿¤ÎÃÍ¤«¤é¡ÖÄ¾ÀÜ¡×·×»»¤¹¤ë¤è¤¦¤Ë¤»¤è.)
  *)
 type nat = Zero | OneMoreThan of nat;;
 
@@ -27,14 +27,16 @@ let rec monus m n =
 		      | OneMoreThan n' -> monus m' n'
 ;;
 
-(* Test *)
+(* Zero¤«¤½¤¦¤Ç¤Ê¤¤¤«¤Ç¾ì¹çÊ¬¤±¤·¤ÆºÆµ¢Åª¤Ë·×»»¤¹¤ë *)
 
-let zero = Zero;;
-let one = OneMoreThan zero;;
-let two = OneMoreThan one;;
+let zero = Zero
+let one = OneMoreThan zero
+let two = OneMoreThan one
 let three = OneMoreThan two;;
-
+(*
 int_of_nat(mul two three) = 6;;
 int_of_nat(monus three one) = 2;;
+ *)
 
+(* Ã±¤Ê¤ëÆ°ºî³ÎÇ§ *)
 

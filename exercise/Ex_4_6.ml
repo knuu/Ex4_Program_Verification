@@ -26,4 +26,15 @@ let rec funny f n =
 let rec funny_rec f n = (* 線形オーダー版funny *)
   if n = 0 then id
   else f $ (funny_rec f (n - 1))
-;;
+
+(*
+funny succ 10 5 = 15;;
+funny succ 10 5 = funny_rec succ 10 5
+ *)
+
+(*
+組み込みのsuccを使った動作確認
+線形オーダーのfunnyを定義し、同様の動作をする確認
+ *)
+
+

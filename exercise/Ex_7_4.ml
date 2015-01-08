@@ -17,5 +17,8 @@ let fact_imp n =
   done; 
   !res;;
 
-(* Test *)
+(* 書くだけ *)
+(*
 fact_imp 6 = 720;;
+ *)
+(* 単なる動作確認 *)

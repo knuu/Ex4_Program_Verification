@@ -60,4 +60,31 @@ let bst22' = let a = add Lf 4 in let b = add a 2 in let c = add b 3 in add c 1;;
 let bst23' = let a = add Lf 4 in let b = add a 3 in let c = add b 1 in add c 2;;
 let bst24' = let a = add Lf 4 in let b = add a 3 in let c = add b 2 in add c 1;;
 
-
+(* 合計14通り。作りかた24通りすべてを確かめればわかる。 *)
+(*
+bst1' = bst1;;
+bst2' = bst2;;
+bst3' = bst3;;
+bst4' = bst3;;
+bst5' = bst4;;
+bst6' = bst5;;
+bst7' = bst6;;
+bst8' = bst7;;
+bst9' = bst6;;
+bst10' = bst6;;
+bst11' = bst7;;
+bst12' = bst7;;
+bst13' = bst8;;
+bst14' = bst8;;
+bst15' = bst9;;
+bst16' = bst9;;
+bst17' = bst8;;
+bst18' = bst9;;
+bst19' = bst10;;
+bst20' = bst11;;
+bst21' = bst12;;
+bst22' = bst12;;
+bst23' = bst13;;
+bst24' = bst14;;
+ *)
+(* 全通り確認 *)

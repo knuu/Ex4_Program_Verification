@@ -48,9 +48,14 @@ let rec change = function
   | _ -> failwith "change"
 ;;
 
+(* ダメだった時は例外を投げて、次のコインを使う *)
+
 let us_coins = [25; 10; 5; 1]
 and gb_coins = [50; 20; 10; 5; 2; 1];;
-
+(*
 change (gb_coins, 43) = [20; 20; 2; 1];;
 change (us_coins, 43) = [25; 10; 5; 1; 1; 1];;
-change ([5; 2], 16);;
+change ([5; 2], 16) = [5; 5; 2; 2; 2];;
+ *)
+(* gd_coinsとus_coinsでのchangeの動作確認と、貪欲法で失敗する場合のテスト *)
+
