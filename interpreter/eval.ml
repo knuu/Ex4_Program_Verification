@@ -21,14 +21,44 @@ let pp_val v = print_string (string_of_exval v)
 let rec apply_prim op arg1 arg2 = match op, arg1, arg2 with
     Plus, IntV i1, IntV i2 -> IntV (i1 + i2)
   | Plus, _, _ -> err ("Both arguments must be integer: +")
+  | Minus, IntV i1, IntV i2 -> IntV (i1 - i2)
+  | Minus, _, _ -> err ("Both arguments must be integer: -")
   | Mult, IntV i1, IntV i2 -> IntV (i1 * i2)
   | Mult, _, _ -> err ("Both arguments must be integer: *")
+  | Div, IntV i1, IntV i2 -> (try IntV (i1 / i2) with 
+				Division_by_zero -> err ("Division_by_zero"))
+  | Div, _, _ -> err ("Both arguments must be integer: /")
+  | Mod, IntV i1, IntV i2 -> (try IntV (i1 mod i2) with 
+				Division_by_zero -> err ("Division_by_zero"))
+  | Mod, _, _ -> err ("Both arguments must be integer: mod")
   | Lt, IntV i1, IntV i2 -> BoolV (i1 < i2)
-  | Lt, _, _ -> err ("Both arguments must be integer: <")
+  | Lt, BoolV i1, BoolV i2 -> BoolV (i1 < i2)
+  | Lt, _, _ -> err ("Both arguments must be integer or boolean: <")
+  | Gt, IntV i1, IntV i2 -> BoolV (i1 > i2)
+  | Gt, BoolV i1, BoolV i2 -> BoolV (i1 > i2)
+  | Gt, _, _ -> err ("Both arguments must be integer or boolean: >")
+  | Lte, IntV i1, IntV i2 -> BoolV (i1 <= i2)
+  | Lte, BoolV i1, BoolV i2 -> BoolV (i1 <= i2)
+  | Lte, _, _ -> err ("Both arguments must be integer or boolean: <=")
+  | Gte, IntV i1, IntV i2 -> BoolV (i1 >= i2)
+  | Gte, BoolV i1, BoolV i2 -> BoolV (i1 >= i2)
+  | Gte, _, _ -> err ("Both arguments must be integer or boolean: >=")
+  | Eq, IntV i1, IntV i2 -> BoolV (i1 = i2)
+  | Eq, BoolV i1, BoolV i2 -> BoolV (i1 = i2)
+  | Eq, _, _ -> err ("Both arguments must be integer or boolean: =")
+  | Ne, IntV i1, IntV i2 -> BoolV (i1 <> i2)
+  | Ne, BoolV i1, BoolV i2 -> BoolV (i1 <> i2)
+  | Ne, _, _ -> err ("Both arguments must be integer or boolean: <>")
   | And, BoolV b1, BoolV b2 -> BoolV (b1 && b2)
   | And, _, _ -> err ("Both arguments must be boolean: &&")
   | Or, BoolV b1, BoolV b2 -> BoolV (b1 || b2)
   | Or, _, _ -> err ("Both arguments must be boolean: ||") 
+
+let rec apply_prim_unary op arg = match op, arg with
+    Not, BoolV b -> BoolV (not b)
+  | Not, _ -> err("An arguments must be boolean: not")
+  | UMinus, IntV i -> IntV (- i)
+  | UMinus, _ -> err("An arguments must be integer: -")
 
 let rec eval_exp env = function
     Var x -> 
@@ -36,6 +66,9 @@ let rec eval_exp env = function
         Environment.Not_bound -> err ("Variable not bound: " ^ x))
   | ILit i -> IntV i
   | BLit b -> BoolV b
+  | UnaryOp (op, exp) ->
+     let arg = eval_exp env exp in
+     apply_prim_unary op arg
   | BinOp (op, exp1, exp2) -> 
       let arg1 = eval_exp env exp1 in
       let arg2 = eval_exp env exp2 in

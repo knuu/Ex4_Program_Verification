@@ -1,12 +1,14 @@
 (* ML interpreter / type reconstruction *)
 type id = string
 
-type binOp = Plus | Mult | Lt | And | Or
+type unaryOp = UMinus | Not
+type binOp = Plus | Minus | Mult | Div | Mod | Lt | Gt | Lte | Gte | Eq | Ne | And | Or 
 
 type exp =
     Var of id
   | ILit of int
   | BLit of bool
+  | UnaryOp of unaryOp * exp
   | BinOp of binOp * exp * exp
   | IfExp of exp * exp * exp
   | LetExp of id * exp * exp

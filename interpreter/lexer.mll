@@ -10,6 +10,8 @@ let reservedWords = [
   ("let", Parser.LET);
   ("fun", Parser.FUN);
   ("rec", Parser.REC);
+  ("mod", Parser.MOD);
+  ("not", Parser.NOT);
 ] 
 }
 
@@ -24,8 +26,14 @@ rule main = parse
 | ")" { Parser.RPAREN }
 | ";;" { Parser.SEMISEMI }
 | "+" { Parser.PLUS }
+| "-" { Parser.MINUS }
 | "*" { Parser.MULT }
+| "/" { Parser.DIV }
 | "<" { Parser.LT }
+| ">" { Parser.GT }
+| "<=" { Parser.LTE }
+| ">=" { Parser.GTE }
+| "<>" { Parser.NE }
 | "&&" { Parser.AND }
 | "||" { Parser.OR }
 | "=" { Parser.EQ }
