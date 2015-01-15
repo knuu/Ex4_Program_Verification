@@ -8,12 +8,12 @@ type exp =
     Var of id
   | ILit of int
   | BLit of bool
-  | ParaList of id * exp
   | UnaryOp of unaryOp * exp
   | BinOp of binOp * exp * exp
   | IfExp of exp * exp * exp
   | LetExp of id * exp * exp
   | FunExp of id * exp
+  | DFunExp of id * exp
   | AppExp of exp * exp
   | LetRecExp of id * id * exp * exp
 

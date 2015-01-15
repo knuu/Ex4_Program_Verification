@@ -8,7 +8,7 @@ open Syntax
 %token IF THEN ELSE TRUE FALSE
 %token AND OR
 %token LET IN EQ
-%token RARROW FUN
+%token RARROW FUN DFUN
 %token REC
 
 %token <int> INTV
@@ -42,11 +42,8 @@ LetExpr :
     LET ID EQ Expr IN Expr { LetExp ($2, $4, $6) }
 
 FunExpr :
-    FUN ParaListExpr RARROW Expr { FunExp ($2, $4) } 
-
-ParaListExpr :
-    ID IdListExpr { ParaList($1, $2) }
-  | ID { $1 }
+    FUN ID RARROW Expr { FunExp ($2, $4) } 
+  | DFUN ID RARROW Expr { DFunExp ($2, $4) }
 
 LetRecExpr :
     LET REC ID EQ FUN ID RARROW Expr IN Expr { LetRecExp ($3, $6, $8, $10) }
