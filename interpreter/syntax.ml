@@ -2,7 +2,9 @@
 type id = string
 
 type unaryOp = UMinus | Not
-type binOp = Plus | Minus | Mult | Div | Mod | Lt | Gt | Lte | Gte | Eq | Ne | And | Or 
+type binOp = Plus | Minus | Mult | Div | Mod 
+	     | Lt | Gt | Lte | Gte | Eq | Ne 
+	     | And | Or 
 
 type exp =
     Var of id
@@ -21,6 +23,7 @@ type program =
     Exp of exp
   | DeclList of program * program
   | Decl of id * exp
+  | AndDecl of id * exp * program
   | RecDecl of id * id * exp
 
 

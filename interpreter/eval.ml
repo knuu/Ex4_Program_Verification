@@ -111,6 +111,10 @@ let rec eval_decl env expr =
 	   eval_decl newenv decllist
 	| Decl (id, exp) ->
 	   let v = eval_exp env exp in (id, Environment.extend id v env, v, "")
+	| AndDecl (id, exp, decl) ->
+	   let v = eval_exp env exp in
+	   let (_, env', _, _) = eval_decl env decl in
+	   (id, Environment.extend id v env', v, "")
 	| RecDecl (id, para, exp) ->
 	   let dummyenv = ref Environment.empty in
 	   let newenv = Environment.extend id (ProcV (para, exp, dummyenv)) env in

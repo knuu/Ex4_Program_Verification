@@ -6,10 +6,10 @@ open Syntax
 %token PLUS MINUS MULT DIV MOD
 %token LT GT LTE GTE NE NOT
 %token IF THEN ELSE TRUE FALSE
-%token AND OR
+%token LOGAND LOGOR
 %token LET IN EQ
 %token RARROW FUN DFUN
-%token REC
+%token REC AND
 
 %token <int> INTV
 %token <Syntax.id> ID
@@ -28,13 +28,17 @@ DeclListExpr :
 
 DeclExpr :
     LET ID EQ Expr { Decl ($2, $4) }
+  | LET ID EQ Expr AND AndDeclExpr { AndDecl ($2, $4, $6) }
   | LET REC ID EQ FUN ID RARROW Expr { RecDecl ($3, $6, $8) }
+
+AndDeclExpr :
+    ID EQ Expr { Decl ($1, $3) }
+  | ID EQ Expr AND AndDeclExpr { AndDecl ($1, $3, $5) }
 
 Expr :
     IfExpr { $1 }
-  | OrExpr { $1 }
+  | LogicalOrExpr { $1 }
   | LetExpr { $1 }
-  | ReExpr { $1 }
   | FunExpr { $1 }
   | LetRecExpr { $1 }
 
@@ -48,12 +52,12 @@ FunExpr :
 LetRecExpr :
     LET REC ID EQ FUN ID RARROW Expr IN Expr { LetRecExp ($3, $6, $8, $10) }
 
-OrExpr :
-    OrExpr OR AndExpr { BinOp (Or, $1, $3) }
-  | AndExpr { $1 }
+LogicalOrExpr :
+    LogicalOrExpr LOGOR LogicalAndExpr { BinOp (Or, $1, $3) }
+  | LogicalAndExpr { $1 }
 
-AndExpr :
-    AndExpr AND NotExpr { BinOp (And, $1, $3) }
+LogicalAndExpr :
+    LogicalAndExpr LOGAND NotExpr { BinOp (And, $1, $3) }
   | NotExpr { $1 }
 
 NotExpr :

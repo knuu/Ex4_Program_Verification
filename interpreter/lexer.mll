@@ -13,6 +13,7 @@ let reservedWords = [
   ("rec", Parser.REC);
   ("mod", Parser.MOD);
   ("not", Parser.NOT);
+  ("and", Parser.AND);
 ] 
 }
 
@@ -35,8 +36,8 @@ rule main = parse
 | "<=" { Parser.LTE }
 | ">=" { Parser.GTE }
 | "<>" { Parser.NE }
-| "&&" { Parser.AND }
-| "||" { Parser.OR }
+| "&&" { Parser.LOGAND }
+| "||" { Parser.LOGOR }
 | "=" { Parser.EQ }
 | "->" { Parser.RARROW }
 
