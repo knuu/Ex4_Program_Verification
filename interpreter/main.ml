@@ -15,7 +15,7 @@ let rec read_eval_print env tyenv =
       read_eval_print newenv tyenv)
     else ( 
       Printf.printf "val %s : " id; 
-      pp_ty ty;
+      print_string (pp_ty ty);
       print_string " = ";
       pp_val v;
       print_newline();

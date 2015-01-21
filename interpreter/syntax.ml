@@ -26,13 +26,33 @@ type program =
   | AndDecl of id * exp * program
   | RecDecl of id * id * exp
 
+type tyvar = int
+
 type ty =
     TyInt
   | TyBool
+  | TyVar of tyvar
+  | TyFun of ty * ty
 
-let pp_ty = function
-    TyInt -> print_string "int"
-  | TyBool -> print_string "bool"
+(* pretty printing *)
+let rec pp_ty = function
+    TyInt -> "int"
+  | TyBool -> "bool"
+  | TyVar v -> "'" ^ Char.escaped ((char_of_int ((int_of_char 'a') + v)))
+  | TyFun (ty1, ty2) -> (pp_ty ty1) ^ " -> " ^ (pp_ty ty2)
+
+let fresh_tyvar =
+  let counter = ref 0 in
+  let body () =
+    let v = !counter in
+    counter := v + 1; v
+  in body
+
+let rec freevar_ty ty = (* ty -> tyvar MySet.t *)
+  match ty with
+  | TyVar v -> MySet.singleton v
+  | TyFun (ty1, ty2) -> MySet.union (freevar_ty ty1) (freevar_ty ty2)
+  | _ -> MySet.empty
 
 
 

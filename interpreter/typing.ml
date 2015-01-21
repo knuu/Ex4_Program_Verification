@@ -22,6 +22,37 @@ let print_op = function
   | And -> "&&"
   | Or -> "||"
 
+type subst = (tyvar * ty) list
+
+let rec subst_type subst ty =
+  match ty with
+    TyVar v -> (match subst with
+		  [] -> err ("variable not bound")
+		| (tv, retty) :: res -> (if tv = v then subst_type res retty
+					else subst_type res ty))
+  | TyFun (ty1, ty2) -> TyFun (subst_type subst ty1, subst_type subst ty2)
+  | _ -> ty
+(*
+(* eqs_of_subst : subst -> (ty * ty) list
+￼型代入を型の等式集合に変換 *)
+let eqs_of_subst s = 
+(* subst_eqs: subst -> (ty * ty) list -> (ty * ty) list
+型の等式集合に型代入を適用 *)
+let subst_eqs s eqs = 
+ *)
+let rec unify ty_list =
+  match ty_list with
+    [] -> []
+  | (ty1, ty2) :: rest ->
+     (match ty1, ty2 with
+	TyInt, TyInt | TyBool, TyBool -> unify rest
+      | TyInt, TyVar v -> (unify rest) @ [(v, TyInt)]
+      | TyBool, TyVar v -> (unify rest) @ [(v, TyBool)]
+      | TyVar v, TyInt -> (unify rest) @ [(v, TyInt)]
+      | TyVar v, TyBool -> (unify rest) @ [(v, TyBool)]
+      | TyFun (t1, t2), TyFun (t1', t2') -> unify ([(t1, t1'); (t2, t2')] @ rest)
+      | _ -> err ("Type Error: cannot unify"))
+     
 let ty_prim op ty1 ty2 = match op with
     Plus | Minus | Mult | Div | Mod 
         -> (match ty1, ty2 with
@@ -60,7 +91,7 @@ let rec ty_exp tyenv = function
      let tyid = ty_exp tyenv exp1 in
      let newenv = Environment.extend id tyid tyenv in
      ty_exp newenv exp2
-  | _ -> err ("Not Implemented!")
+  | _ -> err ("Not Implemented!")     
 
 let ty_decl tyenv = function
     Exp e -> ty_exp tyenv e
