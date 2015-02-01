@@ -1,4 +1,7 @@
 textbook/
+interpreter2/
+report/
+test/
 
 */tmp.ml
 */*.cm[iox]

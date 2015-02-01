@@ -39,7 +39,10 @@ let rec pp_ty = function
     TyInt -> "int"
   | TyBool -> "bool"
   | TyVar v -> "'" ^ Char.escaped ((char_of_int ((int_of_char 'a') + v)))
-  | TyFun (ty1, ty2) -> (pp_ty ty1) ^ " -> " ^ (pp_ty ty2)
+  | TyFun (ty1, ty2) -> 
+     (match ty1 with
+	TyFun (_, _) -> "(" ^ (pp_ty ty1) ^ ")" ^ " -> " ^ (pp_ty ty2)
+      | _ -> (pp_ty ty1) ^ " -> " ^ (pp_ty ty2))
 
 let fresh_tyvar =
   let counter = ref 0 in

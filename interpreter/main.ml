@@ -7,7 +7,7 @@ let rec read_eval_print env tyenv =
   flush stdout;
   try 
     let decl = Parser.toplevel Lexer.main (Lexing.from_channel stdin) in
-    let ty = ty_decl tyenv decl in
+    let (_, ty) = ty_decl tyenv decl in
     let (id, newenv, v, errmsg) = eval_decl env decl in
     if id = "exception" then (
       Printf.printf "%s" errmsg;
